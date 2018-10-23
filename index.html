@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script src="jquery-3.3.1.min.js"></script>
+<!-- <script src="scraper.js"></script> -->
+<!-- <script> -->
+<!-- $(document).ready(function(){ -->
+	<!-- $("button").click(funciton(){ -->
+		<!-- $.ajax({url: "https://www.google.com/", success: function(status){ -->
+			<!-- alert("Status " + status); -->
+		<!-- }}); -->
+	<!-- }); -->
+<!-- }); -->
+<!-- </script> -->
+<script>
+$(document).ready(function(){
+	$("#button1").click(function(){
+		$.getJSON("http://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&&titles=Albert_Einstein&plnamespace=0&pllimit=500&callback=?", function(response) {
+			alert(response); 
+		});	
+	});
+}); 
+</script>
+</head>
+
+<body>
+<h1>Hello World!</h1>
+<div id="test">Potato</div>
+<button id="button1">Font</button>
+</body>
+
+</html>
