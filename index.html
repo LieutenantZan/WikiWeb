@@ -13,13 +13,33 @@
 <!-- }); -->
 <!-- </script> -->
 <script>
-$(document).ready(function(){
-	$("#button1").click(function(){
-		$.getJSON("http://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&&titles=Albert_Einstein&plnamespace=0&pllimit=500&callback=?", function(response) {
-			alert(response); 
-		});	
-	});
-}); 
+	$(document).ready(function(){
+		$("#button1").click(function(){
+			$.ajax({
+			type : "GET",
+			url : "http://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&&titles=Albert_Einstein&plnamespace=0&pllimit=500&callback=?",
+			dataType : "json",
+			action : "query",
+			success : function(result){
+				alert(result.query.normalized[0].from)
+				<!-- s = result.query.pages.736.title -->
+				console.log(Object.getOwnPropertyNames(result.query.pages[Object.keys(result.query.pages)]))
+				<!-- for (var x in result.query.pages[Object.keys(result.query.pages)].links){ -->
+					<!-- console.log(result.query.pages[Object.keys(result.query.pages)].links[x].title) -->
+				<!-- } -->
+				$("#testID").empty();
+				$.each(result.query.pages[Object.keys(result.query.pages)].links, function(i, v){
+					console.log(v.title)
+					$("#testID").append('<li>' + v.title + '</li>');
+				
+				});
+			}
+				<!-- $.getJSON("http://en.wikipedia.org/w/api.php?action=query&format=json&prop=links&&titles=Albert_Einstein&plnamespace=0&pllimit=500&callback=?", function(response) { -->
+					<!-- alert(response);  -->
+				<!-- }); -->
+			})	
+		});
+	}); 
 </script>
 </head>
 
@@ -27,6 +47,10 @@ $(document).ready(function(){
 <h1>Hello World!</h1>
 <div id="test">Potato</div>
 <button id="button1">Font</button>
+
+<ul id="testID">
+<li>Test</li>
+</ul>
 </body>
 
 </html>
